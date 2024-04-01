@@ -1,5 +1,6 @@
 package com.javatechie.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,6 +22,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private UserInfoUserDetailsService userInfoUserDetailsService;
+
     @Bean
     //authentication
     public UserDetailsService userDetailsService() {
@@ -33,7 +37,7 @@ public class SecurityConfig {
 //                .roles("USER","ADMIN","HR")
 //                .build();
 //        return new InMemoryUserDetailsManager(admin, user);
-        return new UserInfoUserDetailsService();
+        return userInfoUserDetailsService;
     }
 
     @Bean
